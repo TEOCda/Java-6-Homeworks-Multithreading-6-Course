@@ -14,12 +14,10 @@ public class Server {
 
     public static void main(String[] args) {
         String host = "127.0.0.1\n";
-        int port = 1254;
+        int port = 0;
 
-        try (FileWriter writer = new FileWriter("src/main/resources/settings.txt", false)) {
-            writer.write("host: " + host);
-            writer.write("port: " + String.valueOf(port));
-            writer.flush();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/settings.txt"))) {
+            port = Integer.parseInt(reader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
